@@ -142,7 +142,7 @@ contract UkraineDAO_NFT {
   function safeTransferFrom (address from, address to, uint256 tokenId, bytes memory data) public payable {
     require(_isApproved(msg.sender, tokenId), "sender is not approved");
     _transferFrom(from, to, tokenId);
-    if (isContract(to)) {
+    if (isContract(to) && ERCTransferable(to).supportsInterface(0x150b7a02)) {
       require(ERCTransferable(to).onERC721Received(address(this), from, tokenId, data) == 0x150b7a02, "onERC721Received has failed");
     }
   }
@@ -390,55 +390,58 @@ contract UkraineDAO_NFT {
 
 interface ERCTransferable {
 
-    // ERC155
-    function safeTransferFrom (address from, address to, uint256 tokenid, uint256 amount, bytes calldata data) external;
+  // ERC155
+  function safeTransferFrom (address from, address to, uint256 tokenid, uint256 amount, bytes calldata data) external;
 
-    // ERC20
-    function transfer (address recipient, uint256 amount) external returns (bool);
+  // ERC20
+  function transfer (address recipient, uint256 amount) external returns (bool);
 
-    // ERC721
-    function safeTransferFrom (address from, address to, uint256 tokenId) external payable;
+  // ERC721
+  function safeTransferFrom (address from, address to, uint256 tokenId) external payable;
 
-    // ERC721
-    function onERC721Received (address operator, address from, uint256 tokenId, bytes calldata data) external pure returns (bytes4);
+  // ERC721
+  function onERC721Received (address operator, address from, uint256 tokenId, bytes calldata data) external view returns (bytes4);
+
+  // ERC721
+  function supportsInterface (bytes4 interfaceId) external view returns (bool);
 
 }
 
 library Base64 {
 
-    function encode(string memory _str) internal pure returns (string memory) {
-        bytes memory data = bytes(_str);
-        return encode(data);
-    }
+  function encode(string memory _str) internal pure returns (string memory) {
+    bytes memory data = bytes(_str);
+    return encode(data);
+  }
 
-    function encode(bytes memory data) internal pure returns (string memory) {
-        string memory table = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-        uint256 encodedLen = 4 * ((data.length + 2) / 3);
-        string memory result = new string(encodedLen + 32);
-        assembly {
-            mstore(result, encodedLen)
-            let tablePtr := add(table, 1)
-            let dataPtr := data
-            let endPtr := add(dataPtr, mload(data))
-            let resultPtr := add(result, 32)
-            for {} lt(dataPtr, endPtr) {}
-            {
-                dataPtr := add(dataPtr, 3)
-                let input := mload(dataPtr)
-                mstore8(resultPtr, mload(add(tablePtr, and(shr(18, input), 0x3F))))
-                resultPtr := add(resultPtr, 1)
-                mstore8(resultPtr, mload(add(tablePtr, and(shr(12, input), 0x3F))))
-                resultPtr := add(resultPtr, 1)
-                mstore8(resultPtr, mload(add(tablePtr, and(shr(6, input), 0x3F))))
-                resultPtr := add(resultPtr, 1)
-                mstore8(resultPtr, mload(add(tablePtr, and(input, 0x3F))))
-                resultPtr := add(resultPtr, 1)
-            }
-            switch mod(mload(data), 3)
-            case 1 { mstore(sub(resultPtr, 2), shl(240, 0x3d3d)) }
-            case 2 { mstore(sub(resultPtr, 1), shl(248, 0x3d)) }
-        }
-        return result;
+  function encode(bytes memory data) internal pure returns (string memory) {
+    string memory table = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    uint256 encodedLen = 4 * ((data.length + 2) / 3);
+    string memory result = new string(encodedLen + 32);
+    assembly {
+      mstore(result, encodedLen)
+      let tablePtr := add(table, 1)
+      let dataPtr := data
+      let endPtr := add(dataPtr, mload(data))
+      let resultPtr := add(result, 32)
+      for {} lt(dataPtr, endPtr) {}
+      {
+        dataPtr := add(dataPtr, 3)
+        let input := mload(dataPtr)
+        mstore8(resultPtr, mload(add(tablePtr, and(shr(18, input), 0x3F))))
+        resultPtr := add(resultPtr, 1)
+        mstore8(resultPtr, mload(add(tablePtr, and(shr(12, input), 0x3F))))
+        resultPtr := add(resultPtr, 1)
+        mstore8(resultPtr, mload(add(tablePtr, and(shr(6, input), 0x3F))))
+        resultPtr := add(resultPtr, 1)
+        mstore8(resultPtr, mload(add(tablePtr, and(input, 0x3F))))
+        resultPtr := add(resultPtr, 1)
+      }
+      switch mod(mload(data), 3)
+      case 1 { mstore(sub(resultPtr, 2), shl(240, 0x3d3d)) }
+      case 2 { mstore(sub(resultPtr, 1), shl(248, 0x3d)) }
     }
+    return result;
+  }
 
 }
