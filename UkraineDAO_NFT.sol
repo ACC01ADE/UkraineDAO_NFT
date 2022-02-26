@@ -310,12 +310,10 @@ contract UkraineDAO_NFT {
           abi.encodePacked(
             "{",
               "\"name\":\"Ukrainian Flag\",",
-              unicode"\"description\":\"This is the Ukranian flag 🇺🇦 1/1.\\n\\n",
-              "Funds raised from this sale go towards Ukrainian civilians who help those suffering from the war initiated by Putin, \\\"Come Back Alive\\\", one of the most effective and transparent Ukrainian charitable and volunteer initiatives: https://savelife.in.ua\\n\\n",
-              "This project is put together for you by Pussy Riot, Trippy Labs, PleasrDAO, CXIP and Ukranian humanitarian activists working tirelessly on the ground and consulting us generously.\\n\\n",
+              unicode"\"description\":\"This is the Ukrainian flag 🇺🇦 1/1. Funds raised from this sale will be directed to helping the Ukrainian civilians suffering from the war initiated by Putin. \\\"Come Back Alive,\\\” one of the most effective and transparent Ukrainian charitable and volunteer initiatives can be found at: https://savelife.in.ua\\n\\n",
+              "This project has been organized by Pussy Riot, Trippy Labs, PleasrDAO, CXIP, and many Ukrainian humanitarian activists working tirelessly on the ground and generously consulting with us to assure we have a safe place to direct our donations that will help those who need it the most.\\n\\n",
               unicode"Much support and love to Ukraine 🇺🇦\",",
               "\"external_url\":\"https://", _domain, "/\",",
-              "\"background_color\":\"ffffff\",",
               "\"image\":\"data:image/svg+xml;base64,", Base64.encode(_flag), "\",",
               "\"image_data\":\"", _flagSafe, "\"",
             "}"
