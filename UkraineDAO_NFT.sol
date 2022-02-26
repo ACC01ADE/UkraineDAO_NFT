@@ -58,8 +58,8 @@ contract UkraineDAO_NFT {
   /*
    * @dev Only one NFT is ever created.
    */
-  constructor(address owner) {
-    _owner = owner;
+  constructor(address contractOwner) {
+    _owner = contractOwner;
     emit OwnershipTransferred(address(0), _owner);
     _mint(_owner, 1);
   }
@@ -310,7 +310,7 @@ contract UkraineDAO_NFT {
           abi.encodePacked(
             "{",
               "\"name\":\"Ukrainian Flag\",",
-              unicode"\"description\":\"This is the Ukrainian flag 🇺🇦 1/1. Funds raised from this sale will be directed to helping the Ukrainian civilians suffering from the war initiated by Putin. \\\"Come Back Alive,\\\” one of the most effective and transparent Ukrainian charitable and volunteer initiatives can be found at: https://savelife.in.ua\\n\\n",
+              unicode"\"description\":\"This is the Ukrainian flag 🇺🇦 1/1. Funds raised from this sale will be directed to helping the Ukrainian civilians suffering from the war initiated by Putin. \\\"Come Back Alive,\\\" one of the most effective and transparent Ukrainian charitable and volunteer initiatives can be found at: https://savelife.in.ua\\n\\n",
               "This project has been organized by Pussy Riot, Trippy Labs, PleasrDAO, CXIP, and many Ukrainian humanitarian activists working tirelessly on the ground and generously consulting with us to assure we have a safe place to direct our donations that will help those who need it the most.\\n\\n",
               unicode"Much support and love to Ukraine 🇺🇦\",",
               "\"external_url\":\"https://", _domain, "/\",",
@@ -407,12 +407,12 @@ interface ERCTransferable {
 
 library Base64 {
 
-  function encode(string memory _str) internal pure returns (string memory) {
+  function encode (string memory _str) internal pure returns (string memory) {
     bytes memory data = bytes(_str);
     return encode(data);
   }
 
-  function encode(bytes memory data) internal pure returns (string memory) {
+  function encode (bytes memory data) internal pure returns (string memory) {
     string memory table = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
     uint256 encodedLen = 4 * ((data.length + 2) / 3);
     string memory result = new string(encodedLen + 32);
