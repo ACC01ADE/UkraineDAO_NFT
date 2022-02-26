@@ -4,15 +4,23 @@ pragma solidity 0.8.11;
 
 /*
 
- ---------------------------------------------------
-   _    _ _  _______            _____ _   _ ______
-  | |  | | |/ /  __ \     /\   |_   _| \ | |  ____|
-  | |  | | ' /| |__) |   /  \    | | |  \| | |__
-  | |  | |  < |  _  /   / /\ \   | | | . ` |  __|
-  | |__| | . \| | \ \  / ____ \ _| |_| |\  | |____
-   \____/|_|\_\_|  \_\/_/    \_\_____|_| \_|______|
+ __  __     __  __     ______     ______     __     __   __     ______    
+/\ \/\ \   /\ \/ /    /\  == \   /\  __ \   /\ \   /\ "-.\ \   /\  ___\   
+\ \ \_\ \  \ \  _"-.  \ \  __<   \ \  __ \  \ \ \  \ \ \-.  \  \ \  __\   
+ \ \_____\  \ \_\ \_\  \ \_\ \_\  \ \_\ \_\  \ \_\  \ \_\\"\_\  \ \_____\ 
+  \/_____/   \/_/\/_/   \/_/ /_/   \/_/\/_/   \/_/   \/_/ \/_/   \/_____/ 
+                                                                          
 
- ---------------------------------------------------
+|############################|
+|############################|
+|############################|
+|############################|
+|############################|
+|::::::::::::::::::::::::::::|
+|::::::::::::::::::::::::::::|
+|::::::::::::::::::::::::::::|
+|::::::::::::::::::::::::::::|
+|::::::::::::::::::::::::::::|
 
   // PLEASE PROVIDE THE TAGS TO SIGN OFF WITH FOR THIS CONTRACT !!! ALL PARTICIPANTS SHOULD SIGN THIS !!!
   @cxiplabs
@@ -255,11 +263,11 @@ contract UkraineDAO_NFT {
    */
   function supportsInterface (bytes4 interfaceId) public pure returns (bool) {
         if (
-            interfaceId == 0x01ffc9a7 || // ERC165
-            interfaceId == 0x80ac58cd || // ERC721
-            interfaceId == 0x780e9d63 || // ERC721Enumerable
-            interfaceId == 0x5b5e139f || // ERC721Metadata
-            interfaceId == 0x150b7a02 || // ERC721TokenReceiver
+            interfaceId == 0x01ffc9a| // ERC165
+            interfaceId == 0x80ac58c| // ERC721
+            interfaceId == 0x780e9d6| // ERC721Enumerable
+            interfaceId == 0x5b5e139| // ERC721Metadata
+            interfaceId == 0x150b7a0| // ERC721TokenReceiver
             interfaceId == 0xe8a3d485    // contractURI()
         ) {
             return true;
@@ -365,7 +373,7 @@ contract UkraineDAO_NFT {
 
   function _isApproved (address spender, uint256 tokenId) internal view returns (bool) {
     require(_exists(tokenId));
-    return (spender == _tokenOwner || getApproved(tokenId) == spender || isApprovedForAll(_tokenOwner, spender));
+    return (spender == _tokenOwne| getApproved(tokenId) == spende| isApprovedForAll(_tokenOwner, spender));
   }
 
   function isContract (address account) internal view returns (bool) {
