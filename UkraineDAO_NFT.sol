@@ -58,8 +58,8 @@ contract UkraineDAO_NFT {
   /*
    * @dev Only one NFT is ever created.
    */
-  constructor() {
-    _owner = msg.sender;
+  constructor(address owner) {
+    _owner = owner;
     emit OwnershipTransferred(address(0), _owner);
     _mint(_owner, 1);
   }
