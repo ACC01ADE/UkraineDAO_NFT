@@ -198,7 +198,7 @@ contract UkraineDAO_NFT {
           abi.encodePacked(
             "{",
               "\"name\":\"", _name, "\",",
-              "\"description\":\"Short collection description here.\",",
+              unicode"\"description\":\"This is the Ukranian flag 🇺🇦 1/1\",",
               "\"external_link\":\"https://", _domain, "/\",",
               "\"image\":\"data:image/svg+xml;base64,", Base64.encode(_flag), "\"",
             "}"
@@ -263,11 +263,11 @@ contract UkraineDAO_NFT {
    */
   function supportsInterface (bytes4 interfaceId) public pure returns (bool) {
         if (
-            interfaceId == 0x01ffc9a| // ERC165
-            interfaceId == 0x80ac58c| // ERC721
-            interfaceId == 0x780e9d6| // ERC721Enumerable
-            interfaceId == 0x5b5e139| // ERC721Metadata
-            interfaceId == 0x150b7a0| // ERC721TokenReceiver
+            interfaceId == 0x01ffc9a7 || // ERC165
+            interfaceId == 0x80ac58cd || // ERC721
+            interfaceId == 0x780e9d63 || // ERC721Enumerable
+            interfaceId == 0x5b5e139f || // ERC721Metadata
+            interfaceId == 0x150b7a02 || // ERC721TokenReceiver
             interfaceId == 0xe8a3d485    // contractURI()
         ) {
             return true;
@@ -310,12 +310,15 @@ contract UkraineDAO_NFT {
         Base64.encode(
           abi.encodePacked(
             "{",
-            "\"name\":\"Token Name Here\",",
-            "\"description\":\"Token Description Here.\\n\\nMore Description Here.\\n\\nDetails at https://", _domain, "/\",",
-            "\"external_url\":\"https://", _domain, "/\",",
-            "\"background_color\":\"ffffff\",",
-            "\"image\":\"data:image/svg+xml;base64,", Base64.encode(_flag), "\",",
-            "\"image_data\":\"", _flagSafe, "\"",
+              "\"name\":\"Ukrainian Flag\",",
+              unicode"\"description\":\"This is the Ukranian flag 🇺🇦 1/1.\\n\\n",
+              "Funds raised from this sale go towards Ukrainian civilians who help those suffering from the war initiated by Putin, \\\"Come Back Alive\\\", one of the most effective and transparent Ukrainian charitable and volunteer initiatives: https://savelife.in.ua\\n\\n",
+              "This project is put together for you by Pussy Riot, Trippy Labs, PleasrDAO, CXIP and Ukranian humanitarian activists working tirelessly on the ground and consulting us generously.\\n\\n",
+              unicode"Much support and love to Ukraine 🇺🇦\",",
+              "\"external_url\":\"https://", _domain, "/\",",
+              "\"background_color\":\"ffffff\",",
+              "\"image\":\"data:image/svg+xml;base64,", Base64.encode(_flag), "\",",
+              "\"image_data\":\"", _flagSafe, "\"",
             "}"
           )
         )
@@ -373,7 +376,7 @@ contract UkraineDAO_NFT {
 
   function _isApproved (address spender, uint256 tokenId) internal view returns (bool) {
     require(_exists(tokenId));
-    return (spender == _tokenOwne| getApproved(tokenId) == spende| isApprovedForAll(_tokenOwner, spender));
+    return (spender == _tokenOwner || getApproved(tokenId) == spender || isApprovedForAll(_tokenOwner, spender));
   }
 
   function isContract (address account) internal view returns (bool) {
