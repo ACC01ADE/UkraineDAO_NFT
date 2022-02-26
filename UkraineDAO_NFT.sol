@@ -22,10 +22,7 @@ pragma solidity 0.8.11;
 |::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::|
 |::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::|
 
-  // PLEASE PROVIDE THE TAGS TO SIGN OFF WITH FOR THIS CONTRACT !!! ALL PARTICIPANTS SHOULD SIGN THIS !!!
-  @cxiplabs
-
- ---------------------------------------------------
+               Pussy Riot, Trippy Labs, PleasrDAO, CXIP
 
 */
 contract UkraineDAO_NFT {
